@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import { Icon } from 'react-native-elements';
 import tw from 'tailwind-react-native-classnames';
+import { useNavigation } from '@react-navigation/native';
 
 
 const data  = [
@@ -19,17 +20,18 @@ const data  = [
     }
 ]
 
-
-
-export default class NavOptions extends Component {
-  render() {
+const NavOptions = () => {
+    const navigation = useNavigation();
+    const styles = StyleSheet.create({});
+    
+    
     return (
         <FlatList 
         data={data}
         horizontal 
         keyExtractor={(item) => item.id} 
         renderItem={({item}) => (
-            <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40 flex flex-row`}>
+            <TouchableOpacity onPress={() => navigation.navigate(item.screen)} style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40 flex flex-row`}>
               <View>
                 <Image
                     style={{width: 120, height: 120, resizeMode: 'contain',}}
@@ -47,7 +49,6 @@ export default class NavOptions extends Component {
         )}
         />
     )
-  }
 }
 
-const styles = StyleSheet.create({})
+export default NavOptions;
