@@ -1,14 +1,42 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
+import tw from 'tailwind-react-native-classnames'
+import Map from '../components/Map'
+import MapView from 'react-native-maps'
+import { createStackNavigator } from '@react-navigation/stack'
+import NavigateCard from '../components/NavigateCard'
+import RideOptionsCard from '../components/RideOptionsCard'
 
-export default class MapScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
+const MapScreen = () => {
+  const Stack = createStackNavigator();
+
+  return (
+    <View>
+      <View style={tw`h-1/3`}>
+        <Map />
       </View>
-    )
-  }
-}
+      <View style={tw`h-2/3`}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='NavigateCard'
+            component={NavigateCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='RideOptionsCard'
+            component={RideOptionsCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </View>
+    </View>
+  )
+};
 
-const styles = StyleSheet.create({})
+export default MapScreen;
+
+const styles = StyleSheet.create({});
