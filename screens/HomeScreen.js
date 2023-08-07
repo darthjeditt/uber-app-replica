@@ -5,19 +5,20 @@ import NavOptions from '../components/NavOptions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
 import NavFavourites from '../components/NavFavourites';
-import { setDestination, setOrigin } from '../slices/navSlice';
-import { useDispatch } from 'react-redux';
+import { setDestination, setOrigin, selectPlaceHolder } from '../slices/navSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const placeHolderText = useSelector(selectPlaceHolder);
 
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
         <Image style={{ width: 100, height: 100, resizeMode: 'contain' }} source={{ uri: 'https://links.papareact.com/gzs', }} />
         <GooglePlacesAutocomplete
-          placeholder='Where From?'
+          placeholder={placeHolderText}
           styles={{
             container: {
               flex: 0,

@@ -2,6 +2,9 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { Icon } from 'react-native-elements';
 import React from 'react';
 import tw from 'tailwind-react-native-classnames';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlaceHolder, setOrigin } from '../slices/navSlice';
 
 
 const data = [
@@ -9,18 +12,28 @@ const data = [
         id: '123',
         icon: 'home',
         location: 'Home',
-        destination: 'Code Street, London, UK',
+        destination: 'Gold Coast QLD, Australia',
     },
     {
         id: '456',
         icon: 'briefcase',
         location: 'Work',
-        destination: 'London Eye, London, UK',
+        destination: 'Brisbane QLD, Australia',
     },
 ];
 
 
 const NavFavourites = () => {
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    const handlePress = (destination, location) => {
+        if (data.location == 'Home') {
+            dispatch(setPlaceHolder(destination));
+        }
+        navigation.navigate('MapScreen')
+    };
+
     return (
         <FlatList
             data={data}
@@ -29,7 +42,7 @@ const NavFavourites = () => {
                 <View style={[tw`bg-gray-200`, { height: 0.5 }]}  />
             )}
             renderItem={({ item: { location, destination, icon } }) => (
-                <TouchableOpacity style={tw`flex-row items-center p-5`}>
+                <TouchableOpacity onPress={() => handlePress(destination, location)} style={tw`flex-row items-center p-5`}>
                     <Icon 
                     style={tw`mr-4 rounded-full bg-gray-300 p-3`}
                     name={icon}
