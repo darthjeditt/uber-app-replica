@@ -4,7 +4,7 @@ import React from 'react';
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPlaceHolder, setOrigin } from '../slices/navSlice';
+import { setPlaceHolder, setOrigin, selectOrigin } from '../slices/navSlice';
 
 
 const data = [
@@ -23,32 +23,35 @@ const data = [
 ];
 
 
-const NavFavourites = () => {
+const NavFavourites = ({ onFavouritePress }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
-    const handlePress = (destination, location) => {
-        if (data.location == 'Home') {
-            dispatch(setPlaceHolder(destination));
-        }
-        navigation.navigate('MapScreen')
-    };
+    // const handlePress = (destination, location) => {
+    //     dispatch(setOrigin({
+    //         location: { lat: null, lng: null }, // You can update this with actual lat/lng if available
+    //         description: destination,
+    //     }));
+    // };
 
     return (
         <FlatList
             data={data}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
-                <View style={[tw`bg-gray-200`, { height: 0.5 }]}  />
+                <View style={[tw`bg-gray-200`, { height: 0.5 }]} />
             )}
             renderItem={({ item: { location, destination, icon } }) => (
-                <TouchableOpacity onPress={() => handlePress(destination, location)} style={tw`flex-row items-center p-5`}>
-                    <Icon 
-                    style={tw`mr-4 rounded-full bg-gray-300 p-3`}
-                    name={icon}
-                    type='ionicon'
-                    color='white'
-                    size={18}
+                <TouchableOpacity onPress={() => {
+                    onFavouritePress(destination)
+                    // handlePress(destination, location);
+                }} style={tw`flex-row items-center p-5`}>
+                    <Icon
+                        style={tw`mr-4 rounded-full bg-gray-300 p-3`}
+                        name={icon}
+                        type='ionicon'
+                        color='white'
+                        size={18}
                     />
                     <View>
                         <Text style={tw`font-semibold text-lg`} >{location}</Text>
