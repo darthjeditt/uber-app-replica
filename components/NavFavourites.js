@@ -24,15 +24,6 @@ const data = [
 
 
 const NavFavourites = ({ onFavouritePress }) => {
-    const navigation = useNavigation();
-    const dispatch = useDispatch();
-
-    // const handlePress = (destination, location) => {
-    //     dispatch(setOrigin({
-    //         location: { lat: null, lng: null }, // You can update this with actual lat/lng if available
-    //         description: destination,
-    //     }));
-    // };
 
     return (
         <FlatList
@@ -44,7 +35,6 @@ const NavFavourites = ({ onFavouritePress }) => {
             renderItem={({ item: { location, destination, icon } }) => (
                 <TouchableOpacity onPress={() => {
                     onFavouritePress(destination)
-                    // handlePress(destination, location);
                 }} style={tw`flex-row items-center p-5`}>
                     <Icon
                         style={tw`mr-4 rounded-full bg-gray-300 p-3`}
