@@ -36,6 +36,7 @@ const RideOptionsCard = () => {
   const travelTimeInfo = useSelector(selectTravelTimeInfo);
 
   return (
+    // Rendering ride options with pricing and selection functionality
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <View>
         <TouchableOpacity
@@ -58,7 +59,7 @@ const RideOptionsCard = () => {
                 resizeMode: 'contain'
               }}
               source={{ uri: image }}
-                />
+            />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
               <Text>{travelTimeInfo?.duration.text} Travel time</Text>

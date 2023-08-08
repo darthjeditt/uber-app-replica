@@ -16,6 +16,7 @@ const HomeScreen = () => {
   const origin = useSelector(selectOrigin);
   const [currentQuery, setCurrentQuery] = useState('');
 
+  // Function to fetch details for the selected destination
   const fetchDetailsForDestination = async (destination) => {
     const response = await fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(destination)}&inputtype=textquery&fields=geometry&key=${GOOGLE_MAPS_APIKEY}`);
     const data = await response.json();
@@ -31,11 +32,14 @@ const HomeScreen = () => {
     }
   }
 
+  // Function to handle favorite destination selection
   const handleFavouritePress = (destination) => {
     gpaRef.current.setAddressText(destination);
     fetchDetailsForDestination(destination);
   }
+
   return (
+    // Rendering the home screen with navigation options and favorites
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
         <Image style={{ width: 100, height: 100, resizeMode: 'contain' }} source={{ uri: 'https://links.papareact.com/gzs', }} />

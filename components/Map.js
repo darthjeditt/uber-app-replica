@@ -16,6 +16,7 @@ const Map = () => {
   const mapRef = useRef(null);
   const dispatch = useDispatch();
 
+  // Function to fit the map to the coordinates of the origin and destination
   useEffect(() => {
     if (!origin || !destination) return;
 
@@ -41,19 +42,21 @@ const Map = () => {
     })
   }, [origin, destination]);
 
+  // Function to get travel time between origin and destination
   useEffect(() => {
     if (!origin || !destination) return;
     const getTravelTime = async () => {
       fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`
       ).then((res) => res.json())
-      .then(data => {
-        dispatch(setTravelTimeInfo(data.rows[0].elements[0]))
-      })
+        .then(data => {
+          dispatch(setTravelTimeInfo(data.rows[0].elements[0]))
+        })
     };
     getTravelTime();
   }, [origin, destination, GOOGLE_MAPS_APIKEY])
 
   return (
+    // Rendering the map view with markers and directions
     <MapView
       ref={mapRef}
       style={tw`flex-1`}

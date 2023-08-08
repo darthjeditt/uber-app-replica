@@ -21,6 +21,7 @@ const NavOptions = () => {
     const origin = useSelector(selectOrigin);
 
     return (
+        // Rendering navigation options (e.g. Get a ride)
         <FlatList
             data={data}
             horizontal

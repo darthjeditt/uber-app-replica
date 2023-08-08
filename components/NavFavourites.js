@@ -24,6 +24,7 @@ const data = [
 
 
 const NavFavourites = ({ onFavouritePress }) => {
+    // Rendering a list of favorite navigation destinations
 
     return (
         <FlatList

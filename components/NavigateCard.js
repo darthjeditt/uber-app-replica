@@ -17,22 +17,23 @@ const NavigateCard = () => {
     const [inputText, setInputText] = useState('');
     const gpaRef = useRef(null);
 
-
+    // Function to fetch details for the selected destination
     const fetchDetailsForDestination = async (destination) => {
         const response = await fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(destination)}&inputtype=textquery&fields=geometry&key=${GOOGLE_MAPS_APIKEY}`);
         const data = await response.json();
         if (data.candidates && data.candidates.length > 0) {
-        const location = data.candidates[0].geometry.location;
-        dispatch(setDestination({
-            location: {
-            lat: location.lat,
-            lng: location.lng,
-            },
-            description: destination,
-        }));
+            const location = data.candidates[0].geometry.location;
+            dispatch(setDestination({
+                location: {
+                    lat: location.lat,
+                    lng: location.lng,
+                },
+                description: destination,
+            }));
         }
     }
 
+    // Function to handle favorite destination selection
     const handleFavouritePress = (destination) => {
         if (gpaRef.current) {
             gpaRef.current.setAddressText(destination);
@@ -40,6 +41,7 @@ const NavigateCard = () => {
         }
     };
     return (
+        // Rendering the navigation card with Google Places Autocomplete
         <SafeAreaView style={tw`bg-white flex-1`}>
             <Text style={tw`text-center py-5 text-xl`}>Good Morning King</Text>
             <View>

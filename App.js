@@ -15,6 +15,7 @@ export default function App() {
 
 
   return (
+     // Rendering the main app with navigation container and Redux provider
     <Provider store={store}>
       <NavigationContainer>
         <SafeAreaProvider>

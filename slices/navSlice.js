@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-}
+// Redux slice for navigation state management
 
 export const navSlice = createSlice({
     name: 'nav',
@@ -12,6 +11,7 @@ export const navSlice = createSlice({
         placeholder: 'Enter a location',
 
     },
+    // Reducers for setting origin, destination, travel time, and placeholder
     reducers: {
         setOrigin: (state, action) => {
             state.origin = action.payload;
