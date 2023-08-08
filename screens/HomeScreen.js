@@ -35,7 +35,6 @@ const HomeScreen = () => {
     gpaRef.current.setAddressText(destination);
     fetchDetailsForDestination(destination);
   }
-  console.log(origin)
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
